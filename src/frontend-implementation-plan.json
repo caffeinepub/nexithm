@@ -1,0 +1,279 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Refactor React (Vite) marketing UI into pages/components/sections without UI changes",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Restructure frontend source tree into pages/components/sections by moving existing marketing components and updating imports only (no UI/behavior changes).",
+      "acceptanceCriteria": [
+        "New files/folders exist under `frontend/src/` as: `pages/HomePage.tsx`, `components/`, `sections/`.",
+        "Existing section components are relocated into `frontend/src/sections/` and still export the same default components with identical JSX, styles, animations, and content.",
+        "`Navbar` and `Footer` are relocated under `frontend/src/components/` with no UI/behavior changes.",
+        "Any shared helper/components currently under `frontend/src/components/marketing/` that are imported by sections (e.g., `MotionHeading`, `MotionReveal`, `CodeBlockWithCopy`, `scroll`) are moved under `frontend/src/components/` (or an appropriate subfolder) and all consuming imports are updated accordingly.",
+        "Frontend builds successfully after the restructure (no missing module/import errors)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/marketing/Navbar.tsx",
+          "operation": "rename",
+          "description": "Move Navbar into the new components folder without changing logic, styles, content, or behavior."
+        },
+        {
+          "path": "frontend/src/components/marketing/Footer.tsx",
+          "operation": "rename",
+          "description": "Move Footer into the new components folder without changing logic, styles, content, or behavior."
+        },
+        {
+          "path": "frontend/src/components/marketing/MotionHeading.tsx",
+          "operation": "rename",
+          "description": "Move MotionHeading into `frontend/src/components/` (or appropriate subfolder) without changing JSX/behavior; update downstream imports accordingly."
+        },
+        {
+          "path": "frontend/src/components/marketing/MotionReveal.tsx",
+          "operation": "rename",
+          "description": "Move MotionReveal into `frontend/src/components/` (or appropriate subfolder) without changing JSX/behavior; update downstream imports accordingly."
+        },
+        {
+          "path": "frontend/src/components/marketing/CodeBlockWithCopy.tsx",
+          "operation": "rename",
+          "description": "Move CodeBlockWithCopy into `frontend/src/components/` (or appropriate subfolder) without changing JSX/behavior; update downstream imports accordingly."
+        },
+        {
+          "path": "frontend/src/components/marketing/scroll.ts",
+          "operation": "rename",
+          "description": "Move the smooth-scroll utility into `frontend/src/components/` (or appropriate subfolder) without changing behavior; update downstream imports accordingly."
+        },
+        {
+          "path": "frontend/src/components/marketing/sections/HeroSection.tsx",
+          "operation": "rename",
+          "description": "Move Hero section component into `frontend/src/sections/` (e.g., `Hero.tsx`) with no markup/style/animation/content changes; update imports only."
+        },
+        {
+          "path": "frontend/src/components/marketing/sections/AboutSection.tsx",
+          "operation": "rename",
+          "description": "Move About section component into `frontend/src/sections/` (e.g., `About.tsx`) with no markup/style/animation/content changes; update imports only."
+        },
+        {
+          "path": "frontend/src/components/marketing/sections/ServicesSection.tsx",
+          "operation": "rename",
+          "description": "Move Services section component into `frontend/src/sections/` (e.g., `Services.tsx`) with no markup/style/animation/content changes; update imports only."
+        },
+        {
+          "path": "frontend/src/components/marketing/sections/WorksSection.tsx",
+          "operation": "rename",
+          "description": "Move Works section component into `frontend/src/sections/` (e.g., `Works.tsx`) with no markup/style/animation/content changes; update imports only."
+        },
+        {
+          "path": "frontend/src/components/marketing/sections/GetCodeSection.tsx",
+          "operation": "rename",
+          "description": "Move GetCode section component into `frontend/src/sections/` (e.g., `GetCode.tsx`) with no markup/style/animation/content changes; update imports only."
+        },
+        {
+          "path": "frontend/src/components/marketing/sections/ContactSection.tsx",
+          "operation": "rename",
+          "description": "Move Contact section component into `frontend/src/sections/` (e.g., `Contact.tsx`) with no markup/style/animation/content changes; update imports only."
+        },
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "modify",
+          "description": "After moving, update Navbar's internal import(s) to the relocated smooth-scroll utility (path-only change) and ensure the generated asset references remain unchanged."
+        },
+        {
+          "path": "frontend/src/sections/Hero.tsx",
+          "operation": "modify",
+          "description": "After moving, update Hero section imports to the relocated smooth-scroll utility (path-only change) while preserving IDs, tabIndex, styles, animations, and generated asset references."
+        },
+        {
+          "path": "frontend/src/sections/About.tsx",
+          "operation": "modify",
+          "description": "After moving, update About section imports to the relocated shared components (MotionHeading/MotionReveal) with path-only changes; keep markup/styles/animations/content identical."
+        },
+        {
+          "path": "frontend/src/sections/Services.tsx",
+          "operation": "modify",
+          "description": "After moving, update Services section imports to the relocated shared components (MotionHeading/MotionReveal) with path-only changes; keep markup/styles/animations/content identical."
+        },
+        {
+          "path": "frontend/src/sections/Works.tsx",
+          "operation": "modify",
+          "description": "After moving, update Works section imports to the relocated shared components (MotionHeading/MotionReveal) with path-only changes; keep markup/styles/animations/content identical."
+        },
+        {
+          "path": "frontend/src/sections/GetCode.tsx",
+          "operation": "modify",
+          "description": "After moving, update GetCode section imports to the relocated shared components (MotionHeading/MotionReveal/CodeBlockWithCopy) with path-only changes; keep markup/styles/animations/content identical."
+        },
+        {
+          "path": "frontend/src/sections/Contact.tsx",
+          "operation": "modify",
+          "description": "After moving, update Contact section imports to the relocated shared components (MotionHeading/MotionReveal) with path-only changes; keep markup/styles/animations/content identical."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Create HomePage page that composes the relocated sections in the exact required order without changing section internals.",
+      "acceptanceCriteria": [
+        "`frontend/src/pages/HomePage.tsx` exists and exports a React component.",
+        "`HomePage` renders the existing sections in the exact order: Hero, About, Services, Works, GetCode, Contact.",
+        "No visual/behavioral changes occur within sections as a result of using `HomePage` (only imports/composition change)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "create",
+          "description": "Create HomePage that imports the moved section components from `frontend/src/sections/` and renders them in this exact order: Hero → About → Services → Works → GetCode → Contact, with composition-only changes."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Update App to render Navbar, HomePage, Footer while keeping the existing wrapper structure/classes unchanged.",
+      "acceptanceCriteria": [
+        "`frontend/src/App.tsx` imports `Navbar` from `src/components`, `HomePage` from `src/pages`, and `Footer` from `src/components`.",
+        "`App.tsx` renders `<Navbar />`, then `<HomePage />`, then `<Footer />` within the same top-level wrapper/classes currently used.",
+        "The rendered UI matches the pre-refactor UI (no content/styling/animation changes)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Replace direct section imports with `Navbar` (from `frontend/src/components/`), `HomePage` (from `frontend/src/pages/`), and `Footer` (from `frontend/src/components/`), preserving the existing top-level wrapper and classes exactly."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Preserve section IDs and smooth-scroll navigation behavior after refactor (including focus management and reduced-motion behavior).",
+      "acceptanceCriteria": [
+        "Each section still renders with the same `id` attribute values as before (e.g., `id=\"home\"`, `id=\"about\"`, `id=\"services\"`, `id=\"works\"`, `id=\"get-code\"`, `id=\"contact\"`).",
+        "`Navbar` item clicks still call the same scrolling utility and result in smooth scrolling (unless user prefers reduced motion) with the same offset behavior.",
+        "After scrolling, the destination section receives focus as before (accessibility behavior preserved)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/scroll.ts",
+          "operation": "modify",
+          "description": "Ensure the moved scroll utility remains behavior-identical (offset, reduced-motion handling, and focus management) and is exported with the same API used by Navbar/Hero."
+        },
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "modify",
+          "description": "Ensure Navbar continues to call the relocated scroll utility for `home`, `about`, `services`, `works`, `get-code`, and `contact` with identical behavior (path-only import updates)."
+        },
+        {
+          "path": "frontend/src/sections/Hero.tsx",
+          "operation": "modify",
+          "description": "Ensure Hero section still uses `id=\"home\"` and invokes the relocated scroll utility for the CTA (path-only import updates; preserve tabIndex and markup)."
+        },
+        {
+          "path": "frontend/src/sections/About.tsx",
+          "operation": "modify",
+          "description": "Verify About section retains `id=\"about\"` and `tabIndex` exactly; apply only import path updates resulting from file moves."
+        },
+        {
+          "path": "frontend/src/sections/Services.tsx",
+          "operation": "modify",
+          "description": "Verify Services section retains `id=\"services\"` and `tabIndex` exactly; apply only import path updates resulting from file moves."
+        },
+        {
+          "path": "frontend/src/sections/Works.tsx",
+          "operation": "modify",
+          "description": "Verify Works section retains `id=\"works\"` and `tabIndex` exactly; apply only import path updates resulting from file moves."
+        },
+        {
+          "path": "frontend/src/sections/GetCode.tsx",
+          "operation": "modify",
+          "description": "Verify GetCode section retains `id=\"get-code\"` exactly; apply only import path updates resulting from file moves."
+        },
+        {
+          "path": "frontend/src/sections/Contact.tsx",
+          "operation": "modify",
+          "description": "Verify Contact section retains `id=\"contact\"` and `tabIndex` exactly; apply only import path updates resulting from file moves."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Update all affected frontend files so the refactor can be applied directly with full updated contents (not diffs).",
+      "acceptanceCriteria": [
+        "The output includes full updated contents for every file that changes path or content as part of the refactor (not just diffs).",
+        "All updated contents reflect import path changes required by the new folder structure.",
+        "No unintended text/content changes are introduced in the moved components beyond import path updates."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for HomePage after wiring section composition and imports."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for App after switching to Navbar/HomePage/Footer composition while preserving wrapper classes."
+        },
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for moved Navbar with updated import paths only (no functional/styling/content changes)."
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for moved Footer (no functional/styling/content changes)."
+        },
+        {
+          "path": "frontend/src/components/MotionHeading.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for moved MotionHeading (no functional/styling/content changes)."
+        },
+        {
+          "path": "frontend/src/components/MotionReveal.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for moved MotionReveal (no functional/styling/content changes)."
+        },
+        {
+          "path": "frontend/src/components/CodeBlockWithCopy.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for moved CodeBlockWithCopy (no functional/styling/content changes)."
+        },
+        {
+          "path": "frontend/src/components/scroll.ts",
+          "operation": "modify",
+          "description": "Provide full final contents for moved scroll utility (no behavioral changes)."
+        },
+        {
+          "path": "frontend/src/sections/Hero.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for moved Hero section with import path updates only."
+        },
+        {
+          "path": "frontend/src/sections/About.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for moved About section with import path updates only."
+        },
+        {
+          "path": "frontend/src/sections/Services.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for moved Services section with import path updates only."
+        },
+        {
+          "path": "frontend/src/sections/Works.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for moved Works section with import path updates only."
+        },
+        {
+          "path": "frontend/src/sections/GetCode.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for moved GetCode section with import path updates only."
+        },
+        {
+          "path": "frontend/src/sections/Contact.tsx",
+          "operation": "modify",
+          "description": "Provide full final contents for moved Contact section with import path updates only."
+        }
+      ]
+    }
+  ]
+}

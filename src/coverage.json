@@ -1,0 +1,182 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-15T16:54:29.662Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 5,
+    "implemented": 5,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Restructure the frontend source tree to match the requested organization by moving existing components (no logic/style/content changes):\n- Create `frontend/src/pages/HomePage.tsx`\n- Create `frontend/src/components/` and move `Navbar` and `Footer` into it\n- Create `frontend/src/sections/` and move the existing section components into it: `Hero`, `About`, `Services`, `Works`, `GetCode`, `Contact`\n- Move any shared marketing-only components used by sections (e.g., `MotionHeading`, `MotionReveal`, `CodeBlockWithCopy`, `scroll` utility) into an appropriate place under `frontend/src/components/` so imports remain clean and build passes\n- Update all import paths affected by file moves",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/marketing/Navbar.tsx",
+          "frontend/src/components/marketing/Footer.tsx",
+          "frontend/src/components/marketing/MotionHeading.tsx",
+          "frontend/src/components/marketing/MotionReveal.tsx",
+          "frontend/src/components/marketing/CodeBlockWithCopy.tsx",
+          "frontend/src/components/marketing/scroll.ts",
+          "frontend/src/components/marketing/sections/HeroSection.tsx",
+          "frontend/src/components/marketing/sections/AboutSection.tsx",
+          "frontend/src/components/marketing/sections/ServicesSection.tsx",
+          "frontend/src/components/marketing/sections/WorksSection.tsx",
+          "frontend/src/components/marketing/sections/GetCodeSection.tsx",
+          "frontend/src/components/marketing/sections/ContactSection.tsx",
+          "frontend/src/components/Navbar.tsx",
+          "frontend/src/sections/Hero.tsx",
+          "frontend/src/sections/About.tsx",
+          "frontend/src/sections/Services.tsx",
+          "frontend/src/sections/Works.tsx",
+          "frontend/src/sections/GetCode.tsx",
+          "frontend/src/sections/Contact.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/marketing/Navbar.tsx",
+          "frontend/src/components/marketing/Footer.tsx",
+          "frontend/src/components/marketing/MotionHeading.tsx",
+          "frontend/src/components/marketing/MotionReveal.tsx",
+          "frontend/src/components/marketing/CodeBlockWithCopy.tsx",
+          "frontend/src/components/marketing/scroll.ts",
+          "frontend/src/components/marketing/sections/HeroSection.tsx",
+          "frontend/src/components/marketing/sections/AboutSection.tsx",
+          "frontend/src/components/marketing/sections/ServicesSection.tsx",
+          "frontend/src/components/marketing/sections/WorksSection.tsx",
+          "frontend/src/components/marketing/sections/GetCodeSection.tsx",
+          "frontend/src/components/marketing/sections/ContactSection.tsx",
+          "frontend/src/components/Navbar.tsx",
+          "frontend/src/sections/Hero.tsx",
+          "frontend/src/sections/About.tsx",
+          "frontend/src/sections/Services.tsx",
+          "frontend/src/sections/Works.tsx",
+          "frontend/src/sections/GetCode.tsx",
+          "frontend/src/sections/Contact.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Create `frontend/src/pages/HomePage.tsx` that renders the section components in this exact order: Hero → About → Services → Works → GetCode → Contact. Ensure it renders only composition/layout and does not alter section markup, props, content, styling, or animations.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/HomePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/HomePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Update `frontend/src/App.tsx` to render exactly:\n- `<Navbar />`\n- `<HomePage />`\n- `<Footer />`\nwhile preserving the existing wrapper structure/classes (e.g., the current dark background wrapper) and without changing UI/behavior.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Preserve all section IDs and smooth-scroll navigation behavior after the refactor. Ensure `Navbar` navigation continues to scroll smoothly to `home`, `about`, `services`, `works`, `get-code`, and `contact` and that focus management still works.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/scroll.ts",
+          "frontend/src/components/Navbar.tsx",
+          "frontend/src/sections/Hero.tsx",
+          "frontend/src/sections/About.tsx",
+          "frontend/src/sections/Services.tsx",
+          "frontend/src/sections/Works.tsx",
+          "frontend/src/sections/GetCode.tsx",
+          "frontend/src/sections/Contact.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/scroll.ts",
+          "frontend/src/components/Navbar.tsx",
+          "frontend/src/sections/Hero.tsx",
+          "frontend/src/sections/About.tsx",
+          "frontend/src/sections/Services.tsx",
+          "frontend/src/sections/Works.tsx",
+          "frontend/src/sections/GetCode.tsx",
+          "frontend/src/sections/Contact.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Provide updated file contents for all modified and newly created frontend files affected by this restructure (including `App.tsx`, `pages/HomePage.tsx`, moved `Navbar`/`Footer`, moved sections, and any moved shared components/utilities) so the refactor can be applied directly.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/components/Navbar.tsx",
+          "frontend/src/components/Footer.tsx",
+          "frontend/src/components/MotionHeading.tsx",
+          "frontend/src/components/MotionReveal.tsx",
+          "frontend/src/components/CodeBlockWithCopy.tsx",
+          "frontend/src/components/scroll.ts",
+          "frontend/src/sections/Hero.tsx",
+          "frontend/src/sections/About.tsx",
+          "frontend/src/sections/Services.tsx",
+          "frontend/src/sections/Works.tsx",
+          "frontend/src/sections/GetCode.tsx",
+          "frontend/src/sections/Contact.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/App.tsx",
+          "frontend/src/components/Navbar.tsx",
+          "frontend/src/components/Footer.tsx",
+          "frontend/src/components/MotionHeading.tsx",
+          "frontend/src/components/MotionReveal.tsx",
+          "frontend/src/components/CodeBlockWithCopy.tsx",
+          "frontend/src/components/scroll.ts",
+          "frontend/src/sections/Hero.tsx",
+          "frontend/src/sections/About.tsx",
+          "frontend/src/sections/Services.tsx",
+          "frontend/src/sections/Works.tsx",
+          "frontend/src/sections/GetCode.tsx",
+          "frontend/src/sections/Contact.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/components/CodeBlockWithCopy.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/MotionHeading.tsx",
+    "frontend/src/components/MotionReveal.tsx",
+    "frontend/src/components/Navbar.tsx",
+    "frontend/src/components/marketing/CodeBlockWithCopy.tsx",
+    "frontend/src/components/marketing/Footer.tsx",
+    "frontend/src/components/marketing/MotionHeading.tsx",
+    "frontend/src/components/marketing/MotionReveal.tsx",
+    "frontend/src/components/marketing/Navbar.tsx",
+    "frontend/src/components/marketing/scroll.ts",
+    "frontend/src/components/marketing/sections/AboutSection.tsx",
+    "frontend/src/components/marketing/sections/ContactSection.tsx",
+    "frontend/src/components/marketing/sections/GetCodeSection.tsx",
+    "frontend/src/components/marketing/sections/HeroSection.tsx",
+    "frontend/src/components/marketing/sections/ServicesSection.tsx",
+    "frontend/src/components/marketing/sections/WorksSection.tsx",
+    "frontend/src/components/scroll.ts",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/sections/About.tsx",
+    "frontend/src/sections/Contact.tsx",
+    "frontend/src/sections/GetCode.tsx",
+    "frontend/src/sections/Hero.tsx",
+    "frontend/src/sections/Services.tsx",
+    "frontend/src/sections/Works.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

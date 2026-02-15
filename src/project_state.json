@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Restructure an existing React + Vite dark-neon portfolio frontend into a cleaner, Next.js-like folder organization (without using Next.js) while preserving all UI, animations, content, section IDs, and smooth-scroll behavior.",
+  "architectural_notes": [
+    "Do not use Next.js; keep React + Vite.",
+    "Preserve all existing styling/theme, animations, content, section IDs, and smooth-scroll behavior during refactor."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-restructure-the-frontend-source-tree-to-match-the-requested-organization-by-moving-existing-components-no-logic-style-content-changes-create-frontend-src-pages-homepage-tsx-create-frontend-src-components-and-move-navbar-and-footer-into-it-create-frontend-src-sections-and-move-the-existing-section-components-into-it-hero-about-services-works-getcode-contact-move-any-shared-marketing-only-components-used-by-sections-e-g-motionheading-motionreveal-codeblockwithcopy-scroll-utility-into-an-appropriate-place-under-frontend-src-components-so-imports-remain-clean-and-build-passes-update-all-import-paths-affected-by-file-moves",
+      "title": "Restructure the frontend source tree to match the requested organization by moving existing components (no logic/style/content changes):\n- Create `frontend/src/pages/HomePage.tsx`\n- Create `frontend/src/components/` and move `Navbar` and `Footer` into it\n- Create `frontend/src/sections/` and move the existing section components into it: `Hero`, `About`, `Services`, `Works`, `GetCode`, `Contact`\n- Move any shared marketing-only components used by sections (e.g., `MotionHeading`, `MotionReveal`, `CodeBlockWithCopy`, `scroll` utility) into an appropriate place under `frontend/src/components/` so imports remain clean and build passes\n- Update all import paths affected by file moves",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-frontend-src-pages-homepage-tsx-that-renders-the-section-components-in-this-exact-order-hero-about-services-works-getcode-contact-ensure-it-renders-only-composition-layout-and-does-not-alter-section-markup-props-content-styling-or-animations",
+      "title": "Create `frontend/src/pages/HomePage.tsx` that renders the section components in this exact order: Hero → About → Services → Works → GetCode → Contact. Ensure it renders only composition/layout and does not alter section markup, props, content, styling, or animations.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-app-tsx-to-render-exactly-navbar-homepage-footer-while-preserving-the-existing-wrapper-structure-classes-e-g-the-current-dark-background-wrapper-and-without-changing-ui-behavior",
+      "title": "Update `frontend/src/App.tsx` to render exactly:\n- `<Navbar />`\n- `<HomePage />`\n- `<Footer />`\nwhile preserving the existing wrapper structure/classes (e.g., the current dark background wrapper) and without changing UI/behavior.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-preserve-all-section-ids-and-smooth-scroll-navigation-behavior-after-the-refactor-ensure-navbar-navigation-continues-to-scroll-smoothly-to-home-about-services-works-get-code-and-contact-and-that-focus-management-still-works",
+      "title": "Preserve all section IDs and smooth-scroll navigation behavior after the refactor. Ensure `Navbar` navigation continues to scroll smoothly to `home`, `about`, `services`, `works`, `get-code`, and `contact` and that focus management still works.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-provide-updated-file-contents-for-all-modified-and-newly-created-frontend-files-affected-by-this-restructure-including-app-tsx-pages-homepage-tsx-moved-navbar-footer-moved-sections-and-any-moved-shared-components-utilities-so-the-refactor-can-be-applied-directly",
+      "title": "Provide updated file contents for all modified and newly created frontend files affected by this restructure (including `App.tsx`, `pages/HomePage.tsx`, moved `Navbar`/`Footer`, moved sections, and any moved shared components/utilities) so the refactor can be applied directly.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Reorganize src into pages/HomePage.tsx, components (Navbar/Footer/shared UI), and sections (Hero/About/Services/Works/GetCode/Contact) with updated imports and no behavior/UI changes.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Create src/pages/HomePage.tsx that composes sections in order: Hero → About → Services → Works → GetCode → Contact.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Update App.tsx to render <Navbar /><HomePage /><Footer /> while preserving smooth-scroll navigation and section IDs.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Restructure React (Vite) frontend into pages/components/sections without UI changes",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

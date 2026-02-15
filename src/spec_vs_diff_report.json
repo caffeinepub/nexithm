@@ -1,0 +1,109 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-15T16:54:29.659Z",
+  "summary": "The refactor partially implements the requested pages/components/sections structure (new `pages/HomePage.tsx`, `components/Navbar.tsx`, `components/Footer.tsx`, and several `sections/*` files). However, it appears to duplicate and keep the old `components/marketing/*` and `components/marketing/sections/*` files (none removed), which does not clearly satisfy the “move existing components” requirement. The diff summary also indicates additional unrequested features/files (e.g., source bundle download support, new hooks, Tailwind/theme changes) that violate the “no UI/content changes” and “no new features” constraints.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Move (relocate) the existing marketing components and sections into `frontend/src/components/` and `frontend/src/sections/` (not duplicate), and update imports so the build passes.",
+      "reason": "No files were removed, and the old paths under `frontend/src/components/marketing/*` and `frontend/src/components/marketing/sections/*` are still present (and listed as modified). This suggests the components/sections were not actually moved/relocated cleanly; instead, new copies may have been added under the new folders.",
+      "evidence": [
+        "Diff summary: \"Removed: 0\"",
+        "MODIFIED FILES: frontend/src/components/marketing/Navbar.tsx",
+        "MODIFIED FILES: frontend/src/components/marketing/Footer.tsx",
+        "MODIFIED FILES: frontend/src/components/marketing/MotionHeading.tsx",
+        "MODIFIED FILES: frontend/src/components/marketing/MotionReveal.tsx",
+        "MODIFIED FILES: frontend/src/components/marketing/scroll.ts",
+        "MODIFIED FILES: frontend/src/components/marketing/sections/AboutSection.tsx",
+        "MODIFIED FILES: frontend/src/components/marketing/sections/ContactSection.tsx",
+        "MODIFIED FILES: frontend/src/components/marketing/sections/GetCodeSection.tsx",
+        "MODIFIED FILES: frontend/src/components/marketing/sections/HeroSection.tsx",
+        "MODIFIED FILES: frontend/src/components/marketing/sections/ServicesSection.tsx",
+        "MODIFIED FILES: frontend/src/components/marketing/sections/WorksSection.tsx"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "Update `frontend/src/App.tsx` to import `Navbar` from `src/components`, `HomePage` from `src/pages`, and `Footer` from `src/components` (per AC), and render them in order while preserving wrapper structure/classes.",
+      "reason": "`App.tsx` imports use relative paths (`./components/...`, `./pages/...`) rather than `src/components` and `src/pages` as explicitly stated in the acceptance criteria. Wrapper preservation cannot be verified beyond what is shown.",
+      "evidence": [
+        "frontend/src/App.tsx (modified): `import Navbar from './components/Navbar';`",
+        "frontend/src/App.tsx (modified): `import HomePage from './pages/HomePage';`",
+        "frontend/src/App.tsx (modified): `import Footer from './components/Footer';`"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Provide full updated file contents for every file that changes path or content as part of the refactor (not just summaries).",
+      "reason": "The diff summary shows many modified files (especially under `frontend/src/components/marketing/*` and `frontend/src/components/marketing/sections/*`) but does not include their updated contents—only file names and a separate `frontend-file-summaries.txt` summary.",
+      "evidence": [
+        "MODIFIED FILES list includes multiple `frontend/src/components/marketing/*` and `frontend/src/components/marketing/sections/*` entries without contents",
+        "frontend-file-summaries.txt (modified) is a summary, not full file contents"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "“Download Source Bundle” feature (footer download button, new GetCode content around downloading `/source-bundle.txt`, and the source bundle file itself).",
+      "reason": "BuildRequest explicitly disallows adding new features/content; the request was only to move files and update imports/composition without UI/content changes.",
+      "evidence": [
+        "frontend/src/components/Footer.tsx (added): contains \"Download Source Bundle\" button and link to `/source-bundle.txt`",
+        "frontend/src/sections/GetCode.tsx (added): includes download instructions for `/source-bundle.txt`",
+        "frontend-file-summaries.txt (modified): mentions `frontend/public/source-bundle.txt`"
+      ]
+    },
+    {
+      "description": "Added/changed hooks and motion/scroll behavior infrastructure beyond file moves (e.g., `usePrefersReducedMotion`, `useScrollProgress`, `useQueries` placeholder).",
+      "reason": "Non-goals forbid refactoring component logic beyond import/path updates and adding new features; these new hooks are not part of the requested folder restructure requirements.",
+      "evidence": [
+        "frontend-file-summaries.txt (modified): mentions `frontend/src/hooks/usePrefersReducedMotion.ts`, `frontend/src/hooks/useScrollProgress.ts`, `frontend/src/hooks/useQueries.ts`"
+      ]
+    },
+    {
+      "description": "Tailwind/theme/CSS changes for a “high-contrast neon dark theme” (tokens, utilities, animations).",
+      "reason": "BuildRequest forbids changing Tailwind theme tokens, CSS variables, or animation timings; these changes are not requested as part of a pure restructure.",
+      "evidence": [
+        "frontend-file-summaries.txt (modified): mentions `frontend/src/index.css` changes and `frontend/tailwind.config.js` extended with neon tokens/animations"
+      ]
+    },
+    {
+      "description": "Added tracking/attribution behavior (caffeine.ai UTM link built from `window.location.hostname`).",
+      "reason": "Not requested; constitutes new content/behavior in the UI rather than a pure file move.",
+      "evidence": [
+        "frontend/src/components/Footer.tsx (added): builds `appIdentifier` from hostname and includes caffeine.ai link with UTM parameters"
+      ]
+    }
+  ],
+  "confidence": 0.74,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/App.tsx",
+    "frontend/src/components/CodeBlockWithCopy.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/MotionHeading.tsx",
+    "frontend/src/components/MotionReveal.tsx",
+    "frontend/src/components/Navbar.tsx",
+    "frontend/src/components/marketing/CodeBlockWithCopy.tsx",
+    "frontend/src/components/marketing/Footer.tsx",
+    "frontend/src/components/marketing/MotionHeading.tsx",
+    "frontend/src/components/marketing/MotionReveal.tsx",
+    "frontend/src/components/marketing/Navbar.tsx",
+    "frontend/src/components/marketing/scroll.ts",
+    "frontend/src/components/marketing/sections/AboutSection.tsx",
+    "frontend/src/components/marketing/sections/ContactSection.tsx",
+    "frontend/src/components/marketing/sections/GetCodeSection.tsx",
+    "frontend/src/components/marketing/sections/HeroSection.tsx",
+    "frontend/src/components/marketing/sections/ServicesSection.tsx",
+    "frontend/src/components/marketing/sections/WorksSection.tsx",
+    "frontend/src/components/scroll.ts",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/sections/About.tsx",
+    "frontend/src/sections/Contact.tsx",
+    "frontend/src/sections/GetCode.tsx",
+    "frontend/src/sections/Hero.tsx",
+    "frontend/src/sections/Services.tsx",
+    "frontend/src/sections/Works.tsx",
+    "project_state.json"
+  ]
+}

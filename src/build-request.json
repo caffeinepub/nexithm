@@ -1,0 +1,126 @@
+{
+  "kind": "build_request",
+  "title": "Restructure React (Vite) frontend into pages/components/sections without UI changes",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Restructure the frontend source tree to match the requested organization by moving existing components (no logic/style/content changes):\n- Create `frontend/src/pages/HomePage.tsx`\n- Create `frontend/src/components/` and move `Navbar` and `Footer` into it\n- Create `frontend/src/sections/` and move the existing section components into it: `Hero`, `About`, `Services`, `Works`, `GetCode`, `Contact`\n- Move any shared marketing-only components used by sections (e.g., `MotionHeading`, `MotionReveal`, `CodeBlockWithCopy`, `scroll` utility) into an appropriate place under `frontend/src/components/` so imports remain clean and build passes\n- Update all import paths affected by file moves",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Restructure my existing React (Vite) frontend into a clean structure without changing UI or behavior.\n\nCreate this structure:\n- src/pages/HomePage.tsx\n- src/components (Navbar, Footer, shared UI)\n- src/sections (Hero, About, Services, Works, GetCode, Contact)\n\nDo not change any styles, animations, or content.\nDo not use Next.js.\nKeep all section IDs and smooth scroll working.\nOutput updated file contents."
+        ]
+      },
+      "acceptanceCriteria": [
+        "New files/folders exist under `frontend/src/` as: `pages/HomePage.tsx`, `components/`, `sections/`.",
+        "Existing section components are relocated into `frontend/src/sections/` and still export the same default components with identical JSX, styles, animations, and content.",
+        "`Navbar` and `Footer` are relocated under `frontend/src/components/` with no UI/behavior changes.",
+        "Any shared helper/components currently under `frontend/src/components/marketing/` that are imported by sections (e.g., `MotionHeading`, `MotionReveal`, `CodeBlockWithCopy`, `scroll`) are moved under `frontend/src/components/` (or an appropriate subfolder) and all consuming imports are updated accordingly.",
+        "Frontend builds successfully after the restructure (no missing module/import errors)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Create `frontend/src/pages/HomePage.tsx` that renders the section components in this exact order: Hero → About → Services → Works → GetCode → Contact. Ensure it renders only composition/layout and does not alter section markup, props, content, styling, or animations.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create HomePage.tsx that renders sections in this order:\nHero → About → Services → Works → GetCode → Contact"
+        ]
+      },
+      "acceptanceCriteria": [
+        "`frontend/src/pages/HomePage.tsx` exists and exports a React component.",
+        "`HomePage` renders the existing sections in the exact order: Hero, About, Services, Works, GetCode, Contact.",
+        "No visual/behavioral changes occur within sections as a result of using `HomePage` (only imports/composition change)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Update `frontend/src/App.tsx` to render exactly:\n- `<Navbar />`\n- `<HomePage />`\n- `<Footer />`\nwhile preserving the existing wrapper structure/classes (e.g., the current dark background wrapper) and without changing UI/behavior.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Update App.tsx to render:\n<Navbar />\n<HomePage />\n<Footer />\n\nDo not change any styles, animations, or content."
+        ]
+      },
+      "acceptanceCriteria": [
+        "`frontend/src/App.tsx` imports `Navbar` from `src/components`, `HomePage` from `src/pages`, and `Footer` from `src/components`.",
+        "`App.tsx` renders `<Navbar />`, then `<HomePage />`, then `<Footer />` within the same top-level wrapper/classes currently used.",
+        "The rendered UI matches the pre-refactor UI (no content/styling/animation changes)."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Preserve all section IDs and smooth-scroll navigation behavior after the refactor. Ensure `Navbar` navigation continues to scroll smoothly to `home`, `about`, `services`, `works`, `get-code`, and `contact` and that focus management still works.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Keep all section IDs and smooth scroll working."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each section still renders with the same `id` attribute values as before (e.g., `id=\"home\"`, `id=\"about\"`, `id=\"services\"`, `id=\"works\"`, `id=\"get-code\"`, `id=\"contact\"`).",
+        "`Navbar` item clicks still call the same scrolling utility and result in smooth scrolling (unless user prefers reduced motion) with the same offset behavior.",
+        "After scrolling, the destination section receives focus as before (accessibility behavior preserved)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Provide updated file contents for all modified and newly created frontend files affected by this restructure (including `App.tsx`, `pages/HomePage.tsx`, moved `Navbar`/`Footer`, moved sections, and any moved shared components/utilities) so the refactor can be applied directly.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Output updated file contents."
+        ]
+      },
+      "acceptanceCriteria": [
+        "The output includes full updated contents for every file that changes path or content as part of the refactor (not just diffs).",
+        "All updated contents reflect import path changes required by the new folder structure.",
+        "No unintended text/content changes are introduced in the moved components beyond import path updates."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not use Next.js.",
+    "Do not change UI, styling, animations, layout, or content; only move files and update imports/composition.",
+    "Preserve all section IDs and existing smooth-scroll behavior.",
+    "Frontend immutable paths must not be edited: `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`, and anything under `frontend/src/components/ui`.",
+    "Backend is out of scope for this request."
+  ],
+  "nonGoals": [
+    "Adding new features, pages, or content.",
+    "Changing Tailwind theme tokens, CSS variables, or animation timings.",
+    "Refactoring component logic beyond what is required to update imports/paths.",
+    "Introducing new routing libraries or frameworks (including Next.js)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

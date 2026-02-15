@@ -1,0 +1,1109 @@
+================================================================================
+NEXITHM - FULL SOURCE CODE BUNDLE
+================================================================================
+Generated: February 15, 2026
+Project: Nexithm - Full-Stack Development Studio Website
+Description: Complete source code for the Nexithm freelance development studio
+             website featuring dark neon theme, motion effects, and modern UI.
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+1. Backend
+   - backend/main.mo
+
+2. Frontend Configuration
+   - frontend/index.html
+   - frontend/tailwind.config.js
+   - frontend/src/index.css
+   - frontend/src/components.json
+
+3. Frontend Application
+   - frontend/src/App.tsx
+   - frontend/src/main.tsx
+   - frontend/src/config.ts
+
+4. Components - Marketing
+   - frontend/src/components/marketing/Navbar.tsx
+   - frontend/src/components/marketing/Footer.tsx
+   - frontend/src/components/marketing/MotionHeading.tsx
+   - frontend/src/components/marketing/MotionReveal.tsx
+   - frontend/src/components/marketing/CodeBlockWithCopy.tsx
+   - frontend/src/components/marketing/scroll.ts
+
+5. Components - Sections
+   - frontend/src/components/marketing/sections/HeroSection.tsx
+   - frontend/src/components/marketing/sections/AboutSection.tsx
+   - frontend/src/components/marketing/sections/ServicesSection.tsx
+   - frontend/src/components/marketing/sections/WorksSection.tsx
+   - frontend/src/components/marketing/sections/GetCodeSection.tsx
+   - frontend/src/components/marketing/sections/ContactSection.tsx
+
+6. Hooks
+   - frontend/src/hooks/useScrollProgress.ts
+   - frontend/src/hooks/usePrefersReducedMotion.ts
+   - frontend/src/hooks/useQueries.ts
+   - frontend/src/hooks/useActor.ts (auto-generated)
+   - frontend/src/hooks/useInternetIdentity.ts (auto-generated)
+
+7. Assets (Generated)
+   - frontend/public/assets/generated/nexithm-hero-bg.dim_2400x1350.png
+   - frontend/public/assets/generated/nexithm-wordmark.dim_1200x300.png
+
+8. Installation Instructions
+
+================================================================================
+INSTALLATION INSTRUCTIONS
+================================================================================
+
+Prerequisites:
+- Node.js (v18 or higher)
+- pnpm (recommended) or npm
+- dfx (Internet Computer SDK)
+
+Steps:
+1. Create a new project directory and navigate to it
+2. Reconstruct all files from this bundle using the filepath markers
+3. Install dependencies:
+   pnpm install
+   (or: npm install)
+
+4. Set up the Internet Computer backend:
+   dfx start --background
+   dfx canister create backend
+   dfx generate backend
+   dfx deploy
+
+5. Start the development server:
+   pnpm start
+   (or: npm start)
+
+6. Open http://localhost:3000 in your browser
+
+================================================================================
+BACKEND CODE
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: backend/main.mo
+--------------------------------------------------------------------------------
+actor {}
+
+================================================================================
+FRONTEND CONFIGURATION
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: frontend/index.html
+--------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexithm - Full-Stack Development Studio</title>
+    <meta name="description" content="Nexithm - Ideas Crafted Into Reality. Professional full-stack development services." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+--------------------------------------------------------------------------------
+FILE: frontend/tailwind.config.js
+--------------------------------------------------------------------------------
+import typography from '@tailwindcss/typography';
+import containerQueries from '@tailwindcss/container-queries';
+import animate from 'tailwindcss-animate';
+
+/** @type {import('tailwindcss').Config} */
+export default {
+    darkMode: ['class'],
+    content: ['index.html', 'src/**/*.{js,ts,jsx,tsx,html,css}'],
+    theme: {
+        container: {
+            center: true,
+            padding: '2rem',
+            screens: {
+                '2xl': '1400px'
+            }
+        },
+        extend: {
+            colors: {
+                border: 'oklch(var(--border))',
+                input: 'oklch(var(--input))',
+                ring: 'oklch(var(--ring) / <alpha-value>)',
+                background: 'oklch(var(--background))',
+                foreground: 'oklch(var(--foreground))',
+                primary: {
+                    DEFAULT: 'oklch(var(--primary) / <alpha-value>)',
+                    foreground: 'oklch(var(--primary-foreground))'
+                },
+                secondary: {
+                    DEFAULT: 'oklch(var(--secondary) / <alpha-value>)',
+                    foreground: 'oklch(var(--secondary-foreground))'
+                },
+                destructive: {
+                    DEFAULT: 'oklch(var(--destructive) / <alpha-value>)',
+                    foreground: 'oklch(var(--destructive-foreground))'
+                },
+                muted: {
+                    DEFAULT: 'oklch(var(--muted) / <alpha-value>)',
+                    foreground: 'oklch(var(--muted-foreground) / <alpha-value>)'
+                },
+                accent: {
+                    DEFAULT: 'oklch(var(--accent) / <alpha-value>)',
+                    foreground: 'oklch(var(--accent-foreground))'
+                },
+                popover: {
+                    DEFAULT: 'oklch(var(--popover))',
+                    foreground: 'oklch(var(--popover-foreground))'
+                },
+                card: {
+                    DEFAULT: 'oklch(var(--card))',
+                    foreground: 'oklch(var(--card-foreground))'
+                },
+                neon: {
+                    DEFAULT: 'oklch(var(--neon))',
+                    glow: 'oklch(var(--neon-glow))'
+                },
+                chart: {
+                    1: 'oklch(var(--chart-1))',
+                    2: 'oklch(var(--chart-2))',
+                    3: 'oklch(var(--chart-3))',
+                    4: 'oklch(var(--chart-4))',
+                    5: 'oklch(var(--chart-5))'
+                }
+            },
+            borderRadius: {
+                lg: 'var(--radius)',
+                md: 'calc(var(--radius) - 2px)',
+                sm: 'calc(var(--radius) - 4px)'
+            },
+            boxShadow: {
+                xs: '0 1px 2px 0 rgba(0,0,0,0.05)',
+                'glow-sm': '0 0 15px oklch(var(--neon-glow))',
+                'glow-md': '0 0 30px oklch(var(--neon-glow))',
+                'glow-lg': '0 0 45px oklch(var(--neon-glow))',
+                'neon': '0 0 20px oklch(var(--neon-glow)), 0 0 40px oklch(var(--neon-glow) / 0.4)',
+                'neon-lg': '0 0 30px oklch(var(--neon-glow)), 0 0 60px oklch(var(--neon-glow) / 0.6)'
+            },
+            keyframes: {
+                'accordion-down': {
+                    from: { height: '0' },
+                    to: { height: 'var(--radix-accordion-content-height)' }
+                },
+                'accordion-up': {
+                    from: { height: 'var(--radix-accordion-content-height)' },
+                    to: { height: '0' }
+                },
+                'fade-in': {
+                    '0%': { opacity: '0', transform: 'translateY(10px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' }
+                },
+                'slide-in': {
+                    '0%': { transform: 'translateX(-100%)' },
+                    '100%': { transform: 'translateX(0)' }
+                },
+                'pulse-glow': {
+                    '0%, 100%': { 
+                        boxShadow: '0 0 20px oklch(var(--neon-glow)), 0 0 40px oklch(var(--neon-glow) / 0.4)' 
+                    },
+                    '50%': { 
+                        boxShadow: '0 0 30px oklch(var(--neon-glow)), 0 0 60px oklch(var(--neon-glow) / 0.6)' 
+                    }
+                }
+            },
+            animation: {
+                'accordion-down': 'accordion-down 0.2s ease-out',
+                'accordion-up': 'accordion-up 0.2s ease-out',
+                'fade-in': 'fade-in 0.6s ease-out',
+                'slide-in': 'slide-in 0.3s ease-out',
+                'pulse-glow': 'pulse-glow 3s ease-in-out infinite'
+            }
+        }
+    },
+    plugins: [typography, containerQueries, animate]
+};
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/index.css
+--------------------------------------------------------------------------------
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        --background: 0.98 0 0;
+        --foreground: 0.15 0 0;
+        --card: 1 0 0;
+        --card-foreground: 0.15 0 0;
+        --popover: 1 0 0;
+        --popover-foreground: 0.15 0 0;
+        --primary: 0.55 0.22 264;
+        --primary-foreground: 0.98 0 0;
+        --secondary: 0.96 0 0;
+        --secondary-foreground: 0.15 0 0;
+        --muted: 0.96 0 0;
+        --muted-foreground: 0.50 0 0;
+        --accent: 0.96 0 0;
+        --accent-foreground: 0.15 0 0;
+        --destructive: 0.58 0.24 27;
+        --destructive-foreground: 0.98 0 0;
+        --border: 0.90 0 0;
+        --input: 0.90 0 0;
+        --ring: 0.55 0.22 264;
+        --neon: 0.70 0.30 180;
+        --neon-glow: 0.70 0.30 180 / 0.5;
+        --chart-1: 0.65 0.22 41;
+        --chart-2: 0.60 0.12 185;
+        --chart-3: 0.40 0.07 227;
+        --chart-4: 0.83 0.19 84;
+        --chart-5: 0.77 0.19 70;
+    }
+
+    .dark {
+        --background: 0.05 0 0;
+        --foreground: 0.98 0.01 264;
+        --card: 0.08 0.01 264;
+        --card-foreground: 0.98 0.01 264;
+        --popover: 0.08 0.01 264;
+        --popover-foreground: 0.98 0.01 264;
+        --primary: 0.75 0.28 180;
+        --primary-foreground: 0.05 0 0;
+        --secondary: 0.15 0.02 264;
+        --secondary-foreground: 0.98 0.01 264;
+        --muted: 0.15 0.02 264;
+        --muted-foreground: 0.60 0.05 264;
+        --accent: 0.18 0.03 264;
+        --accent-foreground: 0.98 0.01 264;
+        --destructive: 0.65 0.28 20;
+        --destructive-foreground: 0.98 0 0;
+        --border: 0.25 0.05 264;
+        --input: 0.20 0.04 264;
+        --ring: 0.75 0.28 180;
+        --neon: 0.75 0.28 180;
+        --neon-glow: 0.75 0.28 180 / 0.6;
+        --chart-1: 0.75 0.28 180;
+        --chart-2: 0.70 0.25 264;
+        --chart-3: 0.77 0.19 70;
+        --chart-4: 0.63 0.27 304;
+        --chart-5: 0.65 0.25 16;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground antialiased;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bold tracking-tight;
+    }
+
+    h1 {
+        @apply text-5xl md:text-7xl lg:text-8xl;
+        letter-spacing: -0.02em;
+    }
+
+    h2 {
+        @apply text-4xl md:text-5xl lg:text-6xl;
+        letter-spacing: -0.02em;
+    }
+
+    h3 {
+        @apply text-2xl md:text-3xl lg:text-4xl;
+    }
+}
+
+@layer utilities {
+    .neon-border {
+        border: 1px solid oklch(var(--neon));
+        box-shadow: 0 0 10px oklch(var(--neon-glow)), inset 0 0 10px oklch(var(--neon-glow) / 0.2);
+    }
+
+    .neon-glow {
+        box-shadow: 0 0 20px oklch(var(--neon-glow)), 0 0 40px oklch(var(--neon-glow) / 0.4);
+    }
+
+    .neon-glow-sm {
+        box-shadow: 0 0 10px oklch(var(--neon-glow)), 0 0 20px oklch(var(--neon-glow) / 0.3);
+    }
+
+    .neon-text {
+        color: oklch(var(--neon));
+        text-shadow: 0 0 10px oklch(var(--neon-glow)), 0 0 20px oklch(var(--neon-glow) / 0.5);
+    }
+
+    .neon-divider {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, oklch(var(--neon)), transparent);
+        box-shadow: 0 0 10px oklch(var(--neon-glow));
+    }
+
+    .bg-grid {
+        background-image: 
+            linear-gradient(oklch(var(--neon) / 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, oklch(var(--neon) / 0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+    }
+
+    .animate-in {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.7s ease-out forwards;
+    }
+
+    .slide-in-from-bottom-4 {
+        transform: translateY(1rem);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(1rem);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse-glow {
+        0%, 100% {
+            box-shadow: 0 0 20px oklch(var(--neon-glow)), 0 0 40px oklch(var(--neon-glow) / 0.4);
+        }
+        50% {
+            box-shadow: 0 0 30px oklch(var(--neon-glow)), 0 0 60px oklch(var(--neon-glow) / 0.6);
+        }
+    }
+
+    .animate-pulse-glow {
+        animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    .delay-150 {
+        animation-delay: 150ms;
+    }
+
+    .delay-300 {
+        animation-delay: 300ms;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+================================================================================
+FRONTEND APPLICATION
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/App.tsx
+--------------------------------------------------------------------------------
+import Navbar from './components/marketing/Navbar';
+import HeroSection from './components/marketing/sections/HeroSection';
+import AboutSection from './components/marketing/sections/AboutSection';
+import ServicesSection from './components/marketing/sections/ServicesSection';
+import WorksSection from './components/marketing/sections/WorksSection';
+import GetCodeSection from './components/marketing/sections/GetCodeSection';
+import ContactSection from './components/marketing/sections/ContactSection';
+import Footer from './components/marketing/Footer';
+
+function App() {
+  return (
+    <div className="dark min-h-screen bg-background text-foreground">
+      <Navbar />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <WorksSection />
+        <GetCodeSection />
+        <ContactSection />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
+
+================================================================================
+COMPONENTS - MARKETING
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/components/marketing/Navbar.tsx
+--------------------------------------------------------------------------------
+import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { scrollToSection } from './scroll';
+
+const navItems = [
+  { label: 'Home', id: 'home' },
+  { label: 'About', id: 'about' },
+  { label: 'Services', id: 'services' },
+  { label: 'Works', id: 'works' },
+  { label: 'Get Code', id: 'get-code' },
+  { label: 'Contact', id: 'contact' },
+];
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleNavClick = (id: string) => {
+    scrollToSection(id);
+    setIsOpen(false);
+  };
+
+  return (
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-background/80 backdrop-blur-xl border-b border-neon/30 shadow-neon' 
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
+          <button
+            onClick={() => scrollToSection('home')}
+            className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-neon rounded-md transition-all hover:scale-105"
+          >
+            <img
+              src="/assets/generated/nexithm-wordmark.dim_1200x300.png"
+              alt="Nexithm"
+              className="h-8 md:h-10 w-auto"
+            />
+          </button>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <Button
+                key={item.id}
+                variant="ghost"
+                onClick={() => handleNavClick(item.id)}
+                className="text-foreground/70 hover:text-neon hover:bg-accent transition-all relative group font-medium"
+              >
+                {item.label}
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-neon group-hover:w-3/4 transition-all duration-300 rounded-full" />
+              </Button>
+            ))}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-md text-foreground hover:text-neon hover:bg-accent focus:outline-none focus:ring-2 focus:ring-neon transition-all"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden py-4 border-t border-neon/30 animate-in slide-in-from-top-2 duration-200">
+            <div className="flex flex-col space-y-2">
+              {navItems.map((item) => (
+                <Button
+                  key={item.id}
+                  variant="ghost"
+                  onClick={() => handleNavClick(item.id)}
+                  className="justify-start text-foreground/70 hover:text-neon hover:bg-accent transition-all font-medium"
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+}
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/components/marketing/Footer.tsx
+--------------------------------------------------------------------------------
+import { Heart, Download } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
+export default function Footer() {
+  const currentYear = new Date().getFullYear();
+  const appIdentifier = encodeURIComponent(
+    typeof window !== 'undefined' ? window.location.hostname : 'nexithm-app'
+  );
+
+  return (
+    <footer className="bg-card border-t border-neon/30 py-12 relative overflow-hidden">
+      {/* Subtle neon glow effect */}
+      <div className="absolute inset-0 bg-gradient-to-b from-neon/5 to-transparent pointer-events-none" />
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col items-center space-y-6">
+          {/* Logo */}
+          <div className="flex items-center space-x-2">
+            <img
+              src="/assets/generated/nexithm-wordmark.dim_1200x300.png"
+              alt="Nexithm"
+              className="h-8 w-auto opacity-90"
+            />
+          </div>
+
+          {/* Tagline */}
+          <p className="text-muted-foreground text-center text-lg">Ideas Crafted Into Reality</p>
+
+          {/* Neon Divider */}
+          <div className="w-full max-w-xs neon-divider" />
+
+          {/* Download Source Bundle Button */}
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="border-neon/50 text-neon hover:bg-neon/10 hover:border-neon transition-all duration-300 hover:shadow-glow-sm group"
+          >
+            <a
+              href="/source-bundle.txt"
+              download="nexithm-source-bundle.txt"
+              className="flex items-center space-x-2"
+            >
+              <Download className="w-5 h-5 group-hover:animate-bounce" />
+              <span className="font-semibold">Download Source Bundle</span>
+            </a>
+          </Button>
+
+          {/* Copyright and Attribution */}
+          <div className="flex flex-col items-center space-y-2 text-sm text-muted-foreground">
+            <p>© {currentYear} Nexithm. All rights reserved.</p>
+            <p className="flex items-center space-x-1">
+              <span>Built with</span>
+              <Heart className="w-4 h-4 text-neon fill-neon" />
+              <span>using</span>
+              <a
+                href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${appIdentifier}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neon hover:underline font-medium transition-all hover:text-shadow-glow"
+              >
+                caffeine.ai
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/components/marketing/scroll.ts
+--------------------------------------------------------------------------------
+export function scrollToSection(id: string) {
+  const element = document.getElementById(id);
+  if (!element) return;
+
+  const navbarHeight = 80;
+  const elementPosition = element.getBoundingClientRect().top;
+  const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: 'smooth'
+  });
+
+  // Set focus for accessibility
+  element.setAttribute('tabindex', '-1');
+  element.focus({ preventScroll: true });
+}
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/components/marketing/CodeBlockWithCopy.tsx
+--------------------------------------------------------------------------------
+import { useState } from 'react';
+import { Check, Copy } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
+interface CodeBlockWithCopyProps {
+  code: string;
+}
+
+export default function CodeBlockWithCopy({ code }: CodeBlockWithCopyProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = code;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (e) {
+        console.error('Failed to copy:', e);
+      }
+      document.body.removeChild(textArea);
+    }
+  };
+
+  return (
+    <div className="relative group">
+      <pre className="bg-background/50 border border-neon/20 rounded-lg p-4 overflow-x-auto text-sm font-mono text-foreground/90">
+        <code>{code}</code>
+      </pre>
+      <Button
+        size="sm"
+        variant="ghost"
+        onClick={handleCopy}
+        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity border-neon/30 hover:border-neon/50 hover:bg-neon/10"
+      >
+        {copied ? (
+          <>
+            <Check className="w-4 h-4 mr-1 text-neon" />
+            <span className="text-neon">Copied!</span>
+          </>
+        ) : (
+          <>
+            <Copy className="w-4 h-4 mr-1" />
+            <span>Copy</span>
+          </>
+        )}
+      </Button>
+    </div>
+  );
+}
+
+================================================================================
+COMPONENTS - SECTIONS
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/components/marketing/sections/GetCodeSection.tsx
+--------------------------------------------------------------------------------
+import { Download, FolderTree, Github } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import MotionHeading from '../MotionHeading';
+import MotionReveal from '../MotionReveal';
+import CodeBlockWithCopy from '../CodeBlockWithCopy';
+
+export default function GetCodeSection() {
+  return (
+    <section id="get-code" className="py-20 md:py-32 relative overflow-hidden">
+      {/* Grid background */}
+      <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <MotionHeading className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-shadow-glow">
+            Get the <span className="text-neon">Code</span>
+          </h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            Download the complete source bundle and push it to GitHub
+          </p>
+        </MotionHeading>
+
+        <div className="max-w-4xl mx-auto space-y-8">
+          {/* Download Section */}
+          <MotionReveal delay={0.1}>
+            <Card className="border-neon/30 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2 text-2xl">
+                  <Download className="w-6 h-6 text-neon" />
+                  <span>Step 1: Download the Source Bundle</span>
+                </CardTitle>
+                <CardDescription className="text-base">
+                  The platform cannot provide a ZIP file directly. Instead, download the complete source bundle as a text file.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Button
+                  asChild
+                  size="lg"
+                  className="w-full sm:w-auto bg-neon/10 border border-neon/50 text-neon hover:bg-neon/20 hover:border-neon transition-all duration-300 hover:shadow-glow"
+                >
+                  <a
+                    href="/source-bundle.txt"
+                    download="nexithm-source-bundle.txt"
+                    className="flex items-center justify-center space-x-2"
+                  >
+                    <Download className="w-5 h-5" />
+                    <span className="font-semibold">Download source-bundle.txt</span>
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+          </MotionReveal>
+
+          {/* Reconstruction Instructions */}
+          <MotionReveal delay={0.2}>
+            <Card className="border-neon/30 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2 text-2xl">
+                  <FolderTree className="w-6 h-6 text-neon" />
+                  <span>Step 2: Reconstruct the Project Locally</span>
+                </CardTitle>
+                <CardDescription className="text-base">
+                  Follow these steps to create the project structure from the bundle:
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <ol className="list-decimal list-inside space-y-3 text-foreground/90">
+                  <li className="pl-2">
+                    <strong className="text-neon">Open the downloaded file</strong> in your text editor (VS Code, Sublime, etc.)
+                  </li>
+                  <li className="pl-2">
+                    <strong className="text-neon">Look for file boundaries</strong> marked by lines like:
+                    <code className="block mt-2 ml-6 text-sm bg-background/50 border border-neon/20 rounded px-3 py-2 font-mono">
+                      FILE: frontend/src/App.tsx
+                    </code>
+                  </li>
+                  <li className="pl-2">
+                    <strong className="text-neon">Create each file</strong> in your local project directory using the exact path shown
+                  </li>
+                  <li className="pl-2">
+                    <strong className="text-neon">Copy the code</strong> between the file markers into each corresponding file
+                  </li>
+                  <li className="pl-2">
+                    <strong className="text-neon">Repeat</strong> for all files in the bundle (backend, frontend, config files, etc.)
+                  </li>
+                </ol>
+                <div className="mt-6 p-4 bg-neon/5 border border-neon/30 rounded-lg">
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-neon">Tip:</strong> The bundle includes installation instructions at the top. Make sure to run <code className="text-neon font-mono">pnpm install</code> after creating all files.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </MotionReveal>
+
+          {/* GitHub Publishing */}
+          <MotionReveal delay={0.3}>
+            <Card className="border-neon/30 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2 text-2xl">
+                  <Github className="w-6 h-6 text-neon" />
+                  <span>Step 3: Push to GitHub</span>
+                </CardTitle>
+                <CardDescription className="text-base">
+                  Initialize a Git repository and push your code to GitHub:
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-sm font-semibold text-neon mb-2">Initialize and commit:</h4>
+                    <CodeBlockWithCopy
+                      code={`git init
+git add .
+git commit -m "Initial commit: Nexithm website"`}
+                    />
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-semibold text-neon mb-2">Add remote and push:</h4>
+                    <CodeBlockWithCopy
+                      code={`git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git branch -M main
+git push -u origin main`}
+                    />
+                  </div>
+
+                  <div className="p-4 bg-neon/5 border border-neon/30 rounded-lg space-y-3">
+                    <p className="text-sm font-semibold text-neon">Optional: Create a Pull Request</p>
+                    <p className="text-sm text-muted-foreground">
+                      If you're working on a branch and want to create a PR:
+                    </p>
+                    <CodeBlockWithCopy
+                      code={`git checkout -b feature/your-feature-name
+git add .
+git commit -m "Add new feature"
+git push -u origin feature/your-feature-name`}
+                    />
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Then visit your repository on GitHub and click <strong className="text-neon">"Compare & pull request"</strong>, or use the GitHub CLI:
+                    </p>
+                    <CodeBlockWithCopy
+                      code={`gh pr create --base main --head feature/your-feature-name --title "Your PR title" --body "Description"`}
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </MotionReveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+================================================================================
+HOOKS
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/hooks/useQueries.ts
+--------------------------------------------------------------------------------
+// Empty placeholder - backend has no methods, all content is static
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/hooks/usePrefersReducedMotion.ts
+--------------------------------------------------------------------------------
+import { useEffect, useState } from 'react';
+
+export function usePrefersReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  return prefersReducedMotion;
+}
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/hooks/useScrollProgress.ts
+--------------------------------------------------------------------------------
+import { useEffect, useState } from 'react';
+import { usePrefersReducedMotion } from './usePrefersReducedMotion';
+
+export function useScrollProgress() {
+  const [scrollY, setScrollY] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
+    let ticking = false;
+
+    const updateScrollPosition = () => {
+      const currentScrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const maxScroll = documentHeight - windowHeight;
+      const progress = maxScroll > 0 ? (currentScrollY / maxScroll) * 100 : 0;
+
+      setScrollY(currentScrollY);
+      setScrollProgress(progress);
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollPosition);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    updateScrollPosition();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [prefersReducedMotion]);
+
+  return { scrollY, scrollProgress };
+}
+
+================================================================================
+MOTION COMPONENTS
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/components/marketing/MotionHeading.tsx
+--------------------------------------------------------------------------------
+import { useEffect, useRef, useState, ReactNode } from 'react';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+
+interface MotionHeadingProps {
+  children: ReactNode;
+  className?: string;
+}
+
+export default function MotionHeading({ children, className = '' }: MotionHeadingProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [prefersReducedMotion]);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+--------------------------------------------------------------------------------
+FILE: frontend/src/components/marketing/MotionReveal.tsx
+--------------------------------------------------------------------------------
+import { useEffect, useRef, useState, ReactNode } from 'react';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+
+interface MotionRevealProps {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}
+
+export default function MotionReveal({ children, delay = 0, className = '' }: MotionRevealProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setIsVisible(true), delay * 1000);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [delay, prefersReducedMotion]);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+================================================================================
+ASSETS REFERENCE
+================================================================================
+
+The following generated assets are included in this project and should be
+placed in the frontend/public/assets/generated/ directory:
+
+1. nexithm-hero-bg.dim_2400x1350.png
+   - Hero section background image
+   - Dimensions: 2400x1350 pixels
+   - Usage: Background for the hero section with neon particle effects
+
+2. nexithm-wordmark.dim_1200x300.png
+   - Nexithm logo/wordmark
+   - Dimensions: 1200x300 pixels
+   - Usage: Navbar logo and footer branding
+
+These assets are referenced in the code using the path:
+/assets/generated/[filename]
+
+Note: These are generated assets that should be downloaded separately or
+recreated based on the design specifications in the project.
+
+================================================================================
+END OF SOURCE BUNDLE
+================================================================================
+
+For questions or support, visit: https://caffeine.ai
